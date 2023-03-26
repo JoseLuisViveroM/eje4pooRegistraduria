@@ -1,0 +1,76 @@
+import tkinter
+from tkinter import ttk, messagebox
+from PIL import ImageTk
+from PIL import Image
+
+class persona():
+    def _init_(self):
+        self._nombre = " "
+        self._cedula = 0
+        self._edad = 0
+    def get_Nombre(self):
+        return self._nombre
+    def get_Cedula(self):
+        return self._cedula
+    def get_Edad(self):
+        return self._edad
+    def set_Nombre(self, n):
+        self._nombre = n
+    def set_Cedula(self, p):
+        self._precio = p
+    def set_Edad(self, e):
+        self._edad = e
+
+    def crear(self, nombre, edad, cedula):
+        self.nombre = nombre
+        self.edad = edad
+        self.cedula = cedula
+
+class ventana:
+    def __init__(self):
+        ventana = tkinter.Tk()
+        ventana.geometry("500x400")
+        ventana.title("Votacion")
+        ventana.configure(bg="white")
+
+        imagen = Image.open("LOGO-REGISTRADURIA.png")
+        fondo = ImageTk.PhotoImage(imagen)
+        etiImagen = tkinter.Label(ventana, image=fondo)
+        etiImagen.pack()
+
+        etiNombre = tkinter.Label(ventana, text="Nombre: ")
+        etiNombre.config(bg="white")
+        etiNombre.pack(side=tkinter.TOP)
+        inNombre = tkinter.Entry(ventana)
+        inNombre.pack(side=tkinter.TOP)
+
+        etiEdad = tkinter.Label(ventana, text="Edad: ")
+        etiEdad.config(bg="White")
+        etiEdad.pack()
+        inEdad = tkinter.Entry(ventana)
+        inEdad.pack()
+
+        def verificarEdad():
+            a = int(str(inEdad.get()))
+            if a<18 or a>70:
+                messagebox.showinfo(message="NO PUEDE VOTAR", title="ADVERTENCIA")
+            else:
+                respuesta = messagebox.askquestion("Confirmacion", "Inscribió su cedula previamente?")
+                return respuesta
+
+
+
+
+
+        botonIngresar = tkinter.Button(ventana, text="INGRESAR", command=verificarEdad)
+        botonIngresar.pack()
+
+        ventana.mainloop()
+
+class controlador():
+    def _init_():
+        v = ventana
+        v.__init__(None)
+
+c = controlador
+c._init_()
