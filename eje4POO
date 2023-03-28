@@ -26,8 +26,38 @@ class persona():
         self.edad = edad
         self.cedula = cedula
 
+class ventanaVotacion:
+
+    def __inti__(self):
+
+        ventana = tkinter.Tk()
+        ventana.geometry("500x400")
+        ventana.title("Votacion")
+        ventana.configure(bg="white")
+
+        etiNombre = tkinter.Label(ventana, text="Nombre: ")
+        etiNombre.config(bg="white")
+        etiNombre.pack(side=tkinter.TOP)
+
+        def votoCandidato1():
+            candidato1 =+ 1
+            print(candidato1)
+        def votoCandidato2():
+            candidato2 =+ 1
+            print(candidato2)
+
+        botonOpcion1 = tkinter.Button(ventana, text="INGRESAR", command = votoCandidato1)
+        botonOpcion1.pack()
+
+        botonOpcion2 = tkinter.Button(ventana, text="INGRESAR", command = votoCandidato2)
+        botonOpcion2.pack()
+
+
 class ventana:
     def __init__(self):
+
+        v = ventanaVotacion
+
         ventana = tkinter.Tk()
         ventana.geometry("500x400")
         ventana.title("Votacion")
@@ -50,19 +80,29 @@ class ventana:
         inEdad = tkinter.Entry(ventana)
         inEdad.pack()
 
-        def verificarEdad():
+
+        def verificarValidez():
             a = int(str(inEdad.get()))
             if a<18 or a>70:
                 messagebox.showinfo(message="NO PUEDE VOTAR", title="ADVERTENCIA")
+
             else:
                 respuesta = messagebox.askquestion("Confirmacion", "Inscribió su cedula previamente?")
-                return respuesta
+                if respuesta == "yes":
+                     i=messagebox.askquestion(message="Quiere votar por el candidato 1")
+                     if i == "yes":
+                         votoCandidato1=+1
+                         messagebox.showinfo(message=("EL candidato 1 tiene ", str(votoCandidato1)))
+                     else:
+                         j = messagebox.askquestion(message="Quiere votar por el candidato 2")
+                         if j == "yes":
+                            votoCandidato2=+1
+                            messagebox.showinfo(message=("EL candidato 2 tiene ", str(votoCandidato2)))
+                         else:
+                            messagebox.showinfo(message=("Su voto fue en blanco y fué invalidado"))
 
 
-
-
-
-        botonIngresar = tkinter.Button(ventana, text="INGRESAR", command=verificarEdad)
+        botonIngresar = tkinter.Button(ventana, text="INGRESAR", command=verificarValidez)
         botonIngresar.pack()
 
         ventana.mainloop()
